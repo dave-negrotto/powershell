@@ -62,18 +62,6 @@ param (
     [Parameter(Mandatory=$true, ValueFromPipelineByPropertyName, HelpMessage="c:\CompanyName_Calendar.ics")][string]$icsFileOutPath
 )
 
-# STILL TO DO: 
-#   1) MAKE PARAMETERS ValueFromPipelineByPropertyName
-#   2) ADD MICROSOFT PROPERTIES TO STRING
-#   3) FIGURE OUT THE LOOP
-#   4) TEST
-
-# Test for input file
-if (-not (Test-Path -Path $csvFileInPath)) {
-  Write-Host "ERROR: missing input file"
-  #exit
-}
-
 # Custom date formats that we want to use
 $longDateFormat = "yyyyMMddTHHmmssZ"
 
@@ -123,13 +111,6 @@ if (Test-Path -Path $csvFileInPath) { # If input file exists, START LOOP FOR EAC
 	
 }
 else {
-	#$categories = $_.categories
-	#$startDate = $_.startDate
-	#$endDate = $_.endDate
-	#$eventSubject = $_.eventSubject
-	#$eventDesc =  $_.eventDesc
-	#$eventLocation = $_.eventLocation
-
 	[void]$sb.AppendLine('BEGIN:VEVENT')
 	[void]$sb.AppendLine('CLASS:PUBLIC')
 	[void]$sb.AppendLine("CATEGORIES:" + $categories)
